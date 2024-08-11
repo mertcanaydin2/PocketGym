@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "PRODUCTS")
-public class ProductEntity {
+public class ProductEntity extends AbstractEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,16 +19,19 @@ public class ProductEntity {
 
     @Column(name = "PRODUCT_NAME")
     private String productName;
+
     @Column(name = "DATA_TYPE")
     private String dataType;
+
     @Column(name = "DATA_TYPE_ID")
     private Long dataTypeId;
+
     @Column(name = "STOCK")
     private Long stock;
+
     @Column(name = "TOTAL_STOCK")
     private Long totalStock;
+
     @Column(name = "PRICE")
     private String price;
-
-
 }

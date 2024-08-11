@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "TYPES")
-public class TypeEntity {
+public class TypeEntity extends AbstractEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,8 +19,10 @@ public class TypeEntity {
 
     @Column(name = "SHRT_CODE") //PROD_ORD
     private String shrtCode;
+
     @Column(name = "TYPE_NAME") //örn: Product Orders
     private String typeName;
+
     @Column(name = "TABLE_NAME") //PRODUCT_ORDERS
     private String tableName;
 

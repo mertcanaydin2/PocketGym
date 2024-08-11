@@ -80,16 +80,18 @@ public class ExerciseManager implements ExerciseService {
     }
 
     public boolean checkExerciseIsExists(String exerciseName) {
+        boolean result;
         try {
-            if (exerciseDao.existsByExerciseNameIgnoreCase(exerciseName)) {
-                return true;
+            if (exerciseDao.existsByExerciseNameIgnoreCaseAndIsActv(exerciseName, true)) {
+                result = true;
             } else {
-                return false;
+                result = false;
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            result = false;
         }
+        return result;
     } 
 
     @Override

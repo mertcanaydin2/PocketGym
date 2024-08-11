@@ -106,4 +106,21 @@ public class BusinessMessages {
             return message;
         }
     }
+    public enum buddyMessages{
+        BUDDY_CREATED("Buddy Sistem Kaydı Başarılı."),
+        BUDDY_NOT_CREATED("Buddy Sistem Kaydı Başarısız."),
+        BUDDY_IS_ALREADY_EXISTS("Buddy Sistem Kaydı Mevcut."),
+        BUDDY_IS_NOT_SELECTABLE("Kullanıcı Seçilemez.");
+
+
+        private String message;
+
+        buddyMessages(String message) {
+            this.message = message;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+    }
 }

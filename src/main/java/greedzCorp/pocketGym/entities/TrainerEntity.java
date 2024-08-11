@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "TRAINERS")
-public class TrainerEntity {
+public class TrainerEntity extends AbstractEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,8 +39,5 @@ public class TrainerEntity {
 
     @Column(name = "EXPERIMENTS")
     private Long experiments;
-    @Column(name = "CREATE_DATE")
-    private String createDate;
-    @Column(name = "IS_ACTV")
-    private int isActv;
+
 }

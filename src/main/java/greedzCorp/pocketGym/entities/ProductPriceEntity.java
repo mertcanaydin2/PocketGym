@@ -10,22 +10,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "PRODUCT_PRICES")
-public class ProductPriceEntity {
+public class ProductPriceEntity extends AbstractEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
+
     @Column(name = "PRODUCT_ID")
     private Long productId;
+
     @Column(name = "PRICE")
     private String price;
+
     @Column(name = "PRICE_TYPE") // döviz tipi
     private String priceType;
-    @Column(name = "CREATE_DATE")
-    private String createDate;
-    @Column(name = "IS_ACTV")
-    private int isActv;
-
-
 }

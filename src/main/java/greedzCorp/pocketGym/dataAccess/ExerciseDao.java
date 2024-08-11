@@ -10,6 +10,8 @@ import java.util.List;
 public interface ExerciseDao extends JpaRepository<ExerciseEntity, Integer> {
 
     List<ExerciseEntity> getAllById(Long exerciseId);
+
     List<ExerciseEntity> getAllByPrimaryMuscleGroup(String muscleGroup);
-    boolean existsByExerciseNameIgnoreCase(String exerciseName);
+
+    boolean existsByExerciseNameIgnoreCaseAndIsActv(String exerciseName, boolean isActv);
 }

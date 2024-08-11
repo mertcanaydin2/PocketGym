@@ -9,23 +9,24 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "STATES")
-public class StateEntity extends AbstractEntity {
+@Table(name = "BUDDY")
+public class BuddyEntity extends AbstractEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    private Long id;
+    private long id;
 
-    @Column(name = "SHRT_CODE")  // CANCELLED
-    private String shrtCode;
+    @Column(name = "CUSTOMER_ID")
+    private long custId;
 
     @Column(name = "NAME")
     private String name;
 
-    @Column(name = "DESC") // İptal Edildi - AÇIKLAMA.
-    private String desc;
+    @Column(name = "SURNAME")
+    private String surname;
 
-    @Column(name = "DATA_TYPE")  // PRODUCT_ORDERS
-    private String dataType;
+    @Column(name = "RELATED_BUDDY_ID")
+    private long relatedBuddyId;
+
 }
