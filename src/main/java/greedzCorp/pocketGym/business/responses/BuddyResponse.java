@@ -15,4 +15,6 @@ public class BuddyResponse {
     private String surname;
 
     private long relatedBuddyId;
+
+    private Long provinceId;
 }

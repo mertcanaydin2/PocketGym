@@ -23,8 +23,8 @@ public class StateEntity extends AbstractEntity {
     @Column(name = "NAME")
     private String name;
 
-    @Column(name = "DESC") // İptal Edildi - AÇIKLAMA.
-    private String desc;
+    @Column(name = "DESCR") // İptal Edildi - AÇIKLAMA.
+    private String descr;
 
     @Column(name = "DATA_TYPE")  // PRODUCT_ORDERS
     private String dataType;

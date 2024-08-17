@@ -11,13 +11,19 @@ import java.util.List;
 @Repository
 public interface BuddyDao extends JpaRepository<BuddyEntity, Integer> {
 
-    List<BuddyEntity> findAllByIdAndIsActv(Long id, boolean isActv);
+    List<BuddyEntity> findAllByCustIdAndIsActv(Long custId, int isActv);
+    
+    List<BuddyEntity> findAllByIdAndIsActv(Long id, int isActv);
 
-    BuddyEntity findBuddyEntitiesByIdAndIsActv(Long id, boolean isActv);
+    BuddyEntity findBuddyEntitiesByIdAndIsActv(Long id, int isActv);
 
-    boolean existsByCustIdAndisActv(Long id, boolean isActv);
+    boolean existsByCustIdAndIsActv(Long id, int isActv);
 
-    @Query(value = "SELECT b.id FROM BUDDY b WHERE IS_ACTV = 1 AND ST_ID = :stId ORDER BY RANDOM() LIMIT 1" , nativeQuery = true)
-    Long findRandomBuddy(@Param("stId") Long stId);
+    @Query(value = "SELECT b.id FROM BUDDY b WHERE IS_ACTV = 1 AND ST_ID = :stId AND PROVINCE_ID = :provinceID AND CUSTOMER_ID <> :custId  ORDER BY RANDOM() LIMIT 1" , nativeQuery = true)
+    Long findRandomBuddy(@Param("stId") Long stId, @Param("provinceID") Long provinceID, @Param("custId") Long custId);
 
+    List<BuddyEntity> findAllById(Long buddyId);
+
+    @Query(value = "SELECT b.PROVINCE_ID from BUDDY b WHERE CUSTOMER_ID = :custId", nativeQuery = true)
+    Long findProvinceIdByCustId(@Param("custId") Long custId);
 }

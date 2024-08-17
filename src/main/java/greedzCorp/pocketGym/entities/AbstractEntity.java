@@ -1,6 +1,8 @@
 package greedzCorp.pocketGym.entities;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,18 +15,17 @@ import java.util.Calendar;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@MappedSuperclass
 public class AbstractEntity {
 
     @Column(name = "ST_ID")
     private long stId;
 
     @Column(name = "IS_ACTV")
-    private boolean isActv;
+    private int isActv = 1;
 
-    LocalDateTime now = LocalDateTime.now();
-    String formattedDate = now.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
     @Column(name = "CREATE_DATE")
-    private String createDate = formattedDate;
+    private String createDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
 
     @Column(name = "CREATE_USER")
     private String createUser;

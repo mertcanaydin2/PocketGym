@@ -13,5 +13,5 @@ public interface ExerciseDao extends JpaRepository<ExerciseEntity, Integer> {
 
     List<ExerciseEntity> getAllByPrimaryMuscleGroup(String muscleGroup);
 
-    boolean existsByExerciseNameIgnoreCaseAndIsActv(String exerciseName, boolean isActv);
+    boolean existsByExerciseNameIgnoreCaseAndIsActv(String exerciseName, int isActv);
 }

@@ -18,7 +18,4 @@ public class ExerciseRequest {
     private String thirdMuscleGroup;
     private String fourthMuscleGroup;
     private String fifthMuscleGroup;
-    private String createDate;
-    private int isActv;
-
 }

@@ -29,4 +29,6 @@ public class BuddyEntity extends AbstractEntity {
     @Column(name = "RELATED_BUDDY_ID")
     private long relatedBuddyId;
 
+    @Column(name = "PROVINCE_ID")
+    private Long provinceId;
 }
