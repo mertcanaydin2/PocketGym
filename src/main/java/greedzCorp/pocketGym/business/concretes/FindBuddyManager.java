@@ -10,7 +10,7 @@ import greedzCorp.pocketGym.core.utilities.results.DataResult;
 import greedzCorp.pocketGym.core.utilities.results.ErrorResult;
 import greedzCorp.pocketGym.core.utilities.results.Result;
 import greedzCorp.pocketGym.core.utilities.results.SuccessDataResult;
-import greedzCorp.pocketGym.dataAccess.BuddyDao;
+import greedzCorp.pocketGym.dataAccess.BuddyRepository;
 import greedzCorp.pocketGym.entities.BuddyEntity;
 import org.springframework.stereotype.Service;
 
@@ -20,19 +20,19 @@ import java.util.Objects;
 @Service
 public class FindBuddyManager implements FindBuddyService {
 
-    private BuddyDao buddyDao;
+    private BuddyRepository buddyRepository;
     private ModelMapperService modelMapperService;
 
-    public FindBuddyManager(BuddyDao buddyDao, ModelMapperService modelMapperService) {
-        this.buddyDao = buddyDao;
+    public FindBuddyManager(BuddyRepository buddyRepository, ModelMapperService modelMapperService) {
+        this.buddyRepository = buddyRepository;
         this.modelMapperService = modelMapperService;
     }
 
     @Override
     public DataResult<List<BuddyResponse>> findRandomBuddy(BuddyRequest request) {
-        Long provinceId = buddyDao.findProvinceIdByCustId(request.getCustId());//işlem yapan user
-        Long buddyId = buddyDao.findRandomBuddy(StateEnums.BuddyStates.ACTV.getStId(), provinceId, request.getCustId());
-        List<BuddyEntity> buddies = buddyDao.findAllById(buddyId);
+        Long provinceId = buddyRepository.findProvinceIdByCustId(request.getCustId());//işlem yapan user
+        Long buddyId = buddyRepository.findRandomBuddy(StateEnums.BuddyStates.ACTV.getStId(), provinceId, request.getCustId());
+        List<BuddyEntity> buddies = buddyRepository.findAllById(buddyId);
         List<BuddyResponse> response = buddies.stream()
                 .map(buddyEntity -> this.modelMapperService.forDto()
                         .map(buddyEntity, BuddyResponse.class))
@@ -55,12 +55,12 @@ public class FindBuddyManager implements FindBuddyService {
 
         buddyEntity.setRelatedBuddyId(request.getRelatedBuddyId());
         buddyEntity.setStId(StateEnums.BuddyStates.MATCHED.getStId());
-        this.buddyDao.save(buddyEntity);
+        this.buddyRepository.save(buddyEntity);
         return null;
     }
 
     private boolean checkBuddyIsSelectable(Long buddyId) {
-        BuddyEntity buddyEntity = buddyDao.findBuddyEntitiesByIdAndIsActv(buddyId, 1);
+        BuddyEntity buddyEntity = buddyRepository.findBuddyEntitiesByIdAndIsActv(buddyId, 1);
         if (StateEnums.BuddyStates.ACTV.getStId().equals(buddyEntity.getStId())){
             return true;
         }

@@ -93,7 +93,10 @@ public class BusinessMessages {
     public enum partyMessages{
         PARTY_USER_CREATED("Üye Başarıyla Kaydedildi."),
         PARTY_USER_NOT_CREATED("Üye Kaydı Başarısız."),
-        PARTY_USER_IS_ALREADY_EXISTS("Üye Zaten Kayıtlı.");
+        PARTY_USER_UPDATED("Üye Başarıyla Güncellendi."),
+        PARTY_USER_NOT_UPDATED("Üye Güncelleme Başarısız."),
+        PARTY_USER_IS_ALREADY_EXISTS("Üye Zaten Kayıtlı."),
+        PARTY_USER_NOT_FOUND("Üye Kaydı Bulunamadı.");
 
 
         private String message;
@@ -109,8 +112,13 @@ public class BusinessMessages {
     public enum buddyMessages{
         BUDDY_CREATED("Buddy Sistem Kaydı Başarılı."),
         BUDDY_NOT_CREATED("Buddy Sistem Kaydı Başarısız."),
+        BUDDY_UPDATED("Buddy Sistem Kaydı Güncellendi."),
+        BUDDY_NOT_UPDATED("Buddy Sistem Kaydı Güncellenemedi"),
+        BUDDY_DELETED("Buddy Sistem Kaydı Silindi."),
+        BUDDY_NOT_DELETED("Buddy Sistem Kaydı Silinemedi."),
         BUDDY_IS_ALREADY_EXISTS("Buddy Sistem Kaydı Mevcut."),
-        BUDDY_IS_NOT_SELECTABLE("Kullanıcı Seçilemez.");
+        BUDDY_IS_NOT_SELECTABLE("Kullanıcı Seçilemez."),
+        BUDDY_NOT_FOUND("Buddy Sistem Kaydı Bulunamadı.");
 
 
         private String message;

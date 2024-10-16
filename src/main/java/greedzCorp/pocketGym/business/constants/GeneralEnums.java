@@ -2,43 +2,29 @@ package greedzCorp.pocketGym.business.constants;
 
 public class GeneralEnums {
 
-    public enum ProductOrderTypes{
-        ACTIVE("ACTV"),
-        PASSIVE("PASSIVE"),
-        CANCELLED("CANCELLED"),
-        OPEN("OPEN"),
-        DELETED("DELETED"),
-        CART("CART"),
-        PENDING("PENDING"),
-        DENIDE("DENIED"),
-        ACCEPTED("ACCEPTED"),
-        CLOSED("CLOSED");
+    public enum DateFormats{
+
+        ddMMyyyy("dd/MM/yyyy","dd/MM/yyyy"),
+        ddMMMMyyyy("dd MMMM yyyy","dd MMMM yyyy"),
+        ddMMMMyyyyHHmm("dd MMMM yyyy HH:mm","dd MMMM yyyy HH:mm");
+
+        //TODO BURAYI DÜZENLE.
 
 
+        private String formatName;
+        private String format;
 
-        private String shrtCode;
-
-        ProductOrderTypes(String shrtCode) {
-            this.shrtCode = shrtCode;
+        DateFormats(String formatName, String format) {
+            this.formatName = formatName;
+            this.format = format;
         }
-        public String getShrtCode() {
-            return shrtCode;
+
+        public String getFormatName() {
+            return formatName;
         }
-    }
-    private enum PartyTypes{
-        INDIVIDUAL("IND"),
-        BUSINESS("BSN"),
-        TRAINER("PT");
 
-
-        private String shrtCode;
-
-        PartyTypes(String shrtCode) {
-            this.shrtCode = shrtCode;
-        }
-        public String getShrtCode() {
-            return shrtCode;
+        public String getFormat() {
+            return format;
         }
     }
-
 }

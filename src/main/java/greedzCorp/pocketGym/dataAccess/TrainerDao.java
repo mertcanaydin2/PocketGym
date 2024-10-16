@@ -10,7 +10,12 @@ import java.util.List;
 public interface TrainerDao extends JpaRepository<TrainerEntity, Integer> {
 
     List<TrainerEntity> getAllById(Long trainerId);
+
     List<TrainerEntity> findAllByFirstNameAndLastNameAndIsActv(String firstName, String lastName, int isActv);
+
     List<TrainerEntity> findAllByFirstNameAndIsActv(String firstName, int isActv);
+
     List<TrainerEntity> findAllByLastNameAndIsActv(String lastName, int isActv);
+
+    boolean existsByCustIdAndIsActv(Long custId, int isActv);
 }

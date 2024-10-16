@@ -1,12 +1,12 @@
 package greedzCorp.pocketGym.business.concretes.CRUD;
 
-import greedzCorp.pocketGym.business.abstracts.ExerciseService;
+import greedzCorp.pocketGym.business.abstracts.CRUD.ExerciseService;
 import greedzCorp.pocketGym.business.constants.BusinessMessages;
 import greedzCorp.pocketGym.business.requests.ExerciseRequest;
 import greedzCorp.pocketGym.business.responses.ExerciseResponse;
 import greedzCorp.pocketGym.core.utilities.mapping.ModelMapperService;
 import greedzCorp.pocketGym.core.utilities.results.*;
-import greedzCorp.pocketGym.dataAccess.ExerciseDao;
+import greedzCorp.pocketGym.dataAccess.ExerciseRepository;
 import greedzCorp.pocketGym.entities.ExerciseEntity;
 import org.springframework.stereotype.Service;
 
@@ -17,17 +17,17 @@ import java.util.Objects;
 
 @Service
 public class ExerciseManager implements ExerciseService {
-    private ExerciseDao exerciseDao;
+    private ExerciseRepository exerciseRepository;
     private ModelMapperService modelMapperService;
 
-    public ExerciseManager(ExerciseDao exerciseDao, ModelMapperService modelMapperService) {
-        this.exerciseDao = exerciseDao;
+    public ExerciseManager(ExerciseRepository exerciseRepository, ModelMapperService modelMapperService) {
+        this.exerciseRepository = exerciseRepository;
         this.modelMapperService = modelMapperService;
     }
 
     @Override
     public DataResult<List<ExerciseResponse>> getAll() {
-        List<ExerciseEntity> exerciseEntities = this.exerciseDao.findAll();
+        List<ExerciseEntity> exerciseEntities = this.exerciseRepository.findAll();
         List<ExerciseResponse> response = exerciseEntities.stream()
                 .map(exerciseEntity -> this.modelMapperService.forDto()
                         .map(exerciseEntity, ExerciseResponse.class))
@@ -53,7 +53,7 @@ public class ExerciseManager implements ExerciseService {
             String formattedDate = now.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
             exerciseEntity.setCreateDate(formattedDate);
             exerciseEntity.setIsActv(1);
-            this.exerciseDao.save(exerciseEntity);
+            this.exerciseRepository.save(exerciseEntity);
 
             return new SuccessResult(BusinessMessages.exerciseMessages.EXERCISE_CREATED.getMessage());
         } catch (Exception e) {
@@ -63,41 +63,43 @@ public class ExerciseManager implements ExerciseService {
 
     @Override
     public Result update(ExerciseRequest request) {
-        ExerciseEntity exerciseEntity = this.modelMapperService.forRequest()
-                .map(request, ExerciseEntity.class);
+        try {
+            ExerciseEntity exerciseEntity = this.modelMapperService.forRequest()
+                    .map(request, ExerciseEntity.class);
 
-        this.exerciseDao.save(exerciseEntity);
-        if (Objects.nonNull(exerciseEntity))
-            return new SuccessResult(BusinessMessages.exerciseMessages.EXERCISE_CREATED.getMessage());
-        return new ErrorResult(BusinessMessages.exerciseMessages.EXERCISE_NOT_CREATED.getMessage());
+            this.exerciseRepository.save(exerciseEntity);
+            return new SuccessResult(BusinessMessages.exerciseMessages.EXERCISE_UPDATED.getMessage());
+        } catch (Exception e) {
+            return new ErrorResult(BusinessMessages.exerciseMessages.EXERCISE_NOT_UPDATED.getMessage());
+        }
     }
 
     @Override
     public Result delete(Long id) {
-        this.exerciseDao.deleteById(Integer.valueOf(Math.toIntExact(id)));
-        if (Objects.nonNull(id))
+        try {
+            this.exerciseRepository.deleteById(Integer.valueOf(Math.toIntExact(id)));
             return new SuccessResult(BusinessMessages.exerciseMessages.EXERCISE_DELETED.getMessage());
-        return new ErrorResult(BusinessMessages.exerciseMessages.EXERCISE_NOT_DELETED.getMessage());
+
+        } catch (Exception e) {
+            return new ErrorResult(BusinessMessages.exerciseMessages.EXERCISE_NOT_DELETED.getMessage());
+        }
     }
 
     public boolean checkExerciseIsExists(String exerciseName) {
-        boolean result;
+        boolean result = false;
         try {
-            if (exerciseDao.existsByExerciseNameIgnoreCaseAndIsActv(exerciseName, 1)) {
+            if (exerciseRepository.existsByExerciseNameIgnoreCaseAndIsActv(exerciseName, 1)) {
                 result = true;
-            } else {
-                result = false;
             }
         } catch (Exception e) {
             e.printStackTrace();
-            result = false;
         }
         return result;
-    } 
+    }
 
     @Override
     public DataResult<List<ExerciseResponse>> getAllByMuscleGroups(String muscleGroup) {
-        List<ExerciseEntity> result = this.exerciseDao.getAllByPrimaryMuscleGroup(muscleGroup);
+        List<ExerciseEntity> result = this.exerciseRepository.getAllByPrimaryMuscleGroup(muscleGroup);
         List<ExerciseResponse> response = result.stream()
                 .map(exerciseEntity -> this.modelMapperService.forDto()
                         .map(exerciseEntity, ExerciseResponse.class))

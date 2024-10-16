@@ -1,13 +1,13 @@
 package greedzCorp.pocketGym.business.concretes.CRUD;
 
-import greedzCorp.pocketGym.business.abstracts.ProductOrderService;
+import greedzCorp.pocketGym.business.abstracts.CRUD.ProductOrderService;
 import greedzCorp.pocketGym.business.constants.BusinessMessages;
 import greedzCorp.pocketGym.business.requests.ProductOrderRequest;
 import greedzCorp.pocketGym.core.utilities.mapping.ModelMapperService;
 import greedzCorp.pocketGym.core.utilities.results.ErrorResult;
 import greedzCorp.pocketGym.core.utilities.results.Result;
 import greedzCorp.pocketGym.core.utilities.results.SuccessResult;
-import greedzCorp.pocketGym.dataAccess.ProductOrderDao;
+import greedzCorp.pocketGym.dataAccess.ProductOrderRepository;
 import greedzCorp.pocketGym.entities.ProductOrderEntity;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +18,11 @@ import java.util.Objects;
 @Service
 public class ProductOrderManager implements ProductOrderService {
 
-    private ProductOrderDao productOrderDao;
+    private ProductOrderRepository productOrderRepository;
     private ModelMapperService modelMapperService;
 
-    public ProductOrderManager(ProductOrderDao productOrderDao, ModelMapperService modelMapperService) {
-        this.productOrderDao = productOrderDao;
+    public ProductOrderManager(ProductOrderRepository productOrderRepository, ModelMapperService modelMapperService) {
+        this.productOrderRepository = productOrderRepository;
         this.modelMapperService = modelMapperService;
     }
 
@@ -34,7 +34,7 @@ public class ProductOrderManager implements ProductOrderService {
         LocalDateTime now = LocalDateTime.now();
         String formattedDate = now.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
         productOrderEntity.setCreateDate(formattedDate);
-        this.productOrderDao.save(productOrderEntity);
+        this.productOrderRepository.save(productOrderEntity);
         if (Objects.nonNull(productOrderEntity)){
             return new SuccessResult(BusinessMessages.productOrderMessages.PRODUCT_ORDER_CREATED.getMessage());
         }

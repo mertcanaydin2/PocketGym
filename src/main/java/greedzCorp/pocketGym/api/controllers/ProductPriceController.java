@@ -1,6 +1,6 @@
 package greedzCorp.pocketGym.api.controllers;
 
-import greedzCorp.pocketGym.business.abstracts.ProductPriceService;
+import greedzCorp.pocketGym.business.abstracts.CRUD.ProductPriceService;
 import greedzCorp.pocketGym.business.requests.ProductPriceRequest;
 import greedzCorp.pocketGym.business.responses.ProductPriceResponse;
 import greedzCorp.pocketGym.core.utilities.results.DataResult;

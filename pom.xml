@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>greedzCorp</groupId>
-	<artifactId>recipeBook</artifactId>
+	<artifactId>pocketGym</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>recipeBook</name>
 	<description>recipeBook project</description>

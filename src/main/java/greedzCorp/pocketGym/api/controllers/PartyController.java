@@ -1,7 +1,6 @@
 package greedzCorp.pocketGym.api.controllers;
 
-import greedzCorp.pocketGym.business.abstracts.PartyService;
-import greedzCorp.pocketGym.business.requests.ExerciseRequest;
+import greedzCorp.pocketGym.business.abstracts.CRUD.PartyService;
 import greedzCorp.pocketGym.business.requests.PartyRequest;
 import greedzCorp.pocketGym.core.utilities.results.Result;
 import org.springframework.web.bind.annotation.PostMapping;

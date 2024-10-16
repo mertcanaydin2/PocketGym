@@ -24,4 +24,44 @@ public class StateEnums {
             return stId;
         }
     }
+
+    public enum ProductOrderStates{
+        ACTIVE("ACTV"),
+        PASSIVE("PASSIVE"),
+        CANCELLED("CANCELLED"),
+        OPEN("OPEN"),
+        DELETED("DELETED"),
+        CART("CART"),
+        PENDING("PENDING"),
+        DENIDE("DENIED"),
+        ACCEPTED("ACCEPTED"),
+        CLOSED("CLOSED");
+
+
+
+        private String shrtCode;
+
+        ProductOrderStates(String shrtCode) {
+            this.shrtCode = shrtCode;
+        }
+        public String getShrtCode() {
+            return shrtCode;
+        }
+    }
+
+    private enum PartyStates{
+        INDIVIDUAL("IND"),
+        BUSINESS("BSN"),
+        TRAINER("PT");
+
+
+        private String shrtCode;
+
+        PartyStates(String shrtCode) {
+            this.shrtCode = shrtCode;
+        }
+        public String getShrtCode() {
+            return shrtCode;
+        }
+    }
 }

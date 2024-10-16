@@ -1,7 +1,7 @@
 package greedzCorp.pocketGym.api.controllers;
 
 
-import greedzCorp.pocketGym.business.abstracts.TrainerService;
+import greedzCorp.pocketGym.business.abstracts.CRUD.TrainerService;
 import greedzCorp.pocketGym.business.requests.TrainerRequest;
 import greedzCorp.pocketGym.business.responses.TrainerResponse;
 import greedzCorp.pocketGym.core.utilities.results.DataResult;

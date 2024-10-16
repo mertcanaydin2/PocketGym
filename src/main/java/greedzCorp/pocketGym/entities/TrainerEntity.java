@@ -40,4 +40,7 @@ public class TrainerEntity extends AbstractEntity {
     @Column(name = "EXPERIMENTS")
     private Long experiments;
 
+    @Column(name = "CUST_ID")
+    private Long custId;
+
 }

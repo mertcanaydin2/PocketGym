@@ -1,6 +1,6 @@
 package greedzCorp.pocketGym.business.concretes.CRUD;
 
-import greedzCorp.pocketGym.business.abstracts.TrainerService;
+import greedzCorp.pocketGym.business.abstracts.CRUD.TrainerService;
 import greedzCorp.pocketGym.business.constants.BusinessMessages;
 import greedzCorp.pocketGym.business.requests.TrainerRequest;
 import greedzCorp.pocketGym.business.responses.TrainerResponse;
@@ -41,12 +41,17 @@ public class TrainerManager implements TrainerService {
 
     @Override
     public Result add(TrainerRequest request) {
+        if (checkTrainerIsExist(request.getCustId())) {
+            return new ErrorResult(BusinessMessages.trainerMessages.TRAINER_IS_ALREADY_EXISTS.getMessage());
+        }
+
         try {
             TrainerEntity trainerEntity = this.modelMapperService.forRequest()
                     .map(request, TrainerEntity.class);
             LocalDateTime now = LocalDateTime.now();
             String formattedDate = now.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
             trainerEntity.setCreateDate(formattedDate);
+            trainerEntity.setIsActv(1);
             this.trainerDao.save(trainerEntity);
             return new SuccessResult(BusinessMessages.trainerMessages.TRAINER_ADDED.getMessage());
         } catch (Exception e) {
@@ -98,5 +103,17 @@ public class TrainerManager implements TrainerService {
             return new SuccessDataResult<>(response);
         }
         return new ErrorDataResult<>(BusinessMessages.trainerMessages.TRAINER_NOT_FOUND.getMessage());
+    }
+
+    public boolean checkTrainerIsExist(Long custId) {
+        boolean isExist = false;
+        try {
+            if (trainerDao.existsByCustIdAndIsActv(custId, 1)) {
+                isExist = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return isExist;
     }
 }

@@ -17,5 +17,6 @@ public class TrainerResponse {
     private String gymName;
     private String comment;
     private Long experiments;
+    private Long custId;
 
 }

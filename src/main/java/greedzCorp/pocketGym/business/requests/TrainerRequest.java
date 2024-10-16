@@ -19,6 +19,7 @@ public class TrainerRequest {
     private String mobilePhone;
     private String gymName;
     private String comment;
+    private Long custId;
     private Long experiments;
     private String createDate;
     private int isActv;
